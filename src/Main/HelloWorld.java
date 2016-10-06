@@ -6,5 +6,6 @@ public class HelloWorld {
 		System.out.println("Autor: Andrei Pugatšov");
 		System.out.println("Testing GIT");
 		System.out.println("Testing GIT - 2");
+		System.out.println("Testing GIT - 3");
     }
 }
