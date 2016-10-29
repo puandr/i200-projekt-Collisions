@@ -1,13 +1,14 @@
-/**
- * Created by andrei on 29.10.2016.
- */
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+
+
 public class Gameboard {
-    int gameboardSize;
-    String gameboardColor;
-
-    void newGameboard(){
-
+    public Gameboard (int gameboardSize){
+        Pane pane = new Pane();
+        Scene mainScene = new Scene(pane, gameboardSize, gameboardSize);
     }
 
-
 }
+
+
+

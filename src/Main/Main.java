@@ -5,21 +5,28 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-/**
- * Created by andrei on 25.10.2016.
- */
+
 public class Main extends Application {
 
     @Override
     public void start(Stage mainStage) throws Exception{
 
+        //Can't run .start method without arguments
+        //gameStarter newGame = new gameStarter();
+        //newGame.start();
+
+
         Pane pane = new Pane();
         Scene mainScene = new Scene(pane, 500, 500);
+
+        MovingActors mainHero = new MovingActors(50, "00FF00", 50, 250);
+
+        pane.getChildren().add(mainHero);
 
         mainStage.setScene(mainScene);
         mainStage.show();
 
-
+        /*
         Circle mainHero = new Circle(50);
         mainHero.setCenterX(50);
         mainHero.setCenterY(250);
@@ -38,6 +45,8 @@ public class Main extends Application {
         pane.getChildren().add(mainHero);
         pane.getChildren().add(firstOpponent);
         pane.getChildren().add(secondOpponent);
+        */
+
 
     }
 }
