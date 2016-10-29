@@ -19,6 +19,7 @@ public class Main extends Application {
         mainStage.setScene(mainScene);
         mainStage.show();
 
+
         Circle mainHero = new Circle(50);
         mainHero.setCenterX(50);
         mainHero.setCenterY(250);
