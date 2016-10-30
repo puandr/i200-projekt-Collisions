@@ -19,7 +19,7 @@ public class MovingActors extends Circle {
     }
 
     void move(int movingDirection, int movingSpeed){
-
+        this.setCenterX(getCenterX()-movingDirection);
     }
 
     int calculateSpeedAfterCollision(int currentSpeed){
