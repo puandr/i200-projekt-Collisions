@@ -30,6 +30,7 @@ public class GameStarter {
             @Override
             public void handle (long now) {
                 firstOpponent.move(movingStepSize, gameboardSize);
+                secondOpponent.move(movingStepSize, gameboardSize);
             }
         }.start();
 

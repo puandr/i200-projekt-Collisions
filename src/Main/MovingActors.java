@@ -21,32 +21,27 @@ public class MovingActors extends Circle {
         setFill(setCircleColor);
         setCenterX(xPosition);
         setCenterY(yPosition);
-        //movingAngle = Math.toRadians(Math.random()*360);
-        movingAngle = Math.toRadians(90);
+        movingAngle = Math.toRadians(Math.random()*360);
+        //movingAngle = Math.toRadians(90);
         dx = Math.sin(movingAngle) * movingStepSize;
         dy = Math.cos(movingAngle) * movingStepSize;
     }
 
     void move(int movingStepSize, int gameBoardSize){
-
         double xSize = this.getCenterX() + this.getRadius();
         double ySize = this.getCenterY() + this.getRadius();
 
-        System.out.println(moveNumber + " " + xSize + " " + dx + " GBS: " + gameBoardSize);
         if (xSize > gameBoardSize) {
-            System.out.println(xSize > gameBoardSize);
-            dx = dx * (-1);
-
+            dx = -dx;
         }
 
-        if (xSize < 0 && dx < 0){
-            dx = dx;
-            //this.setCenterX(getCenterX() + movingStepSize);
+        if ((xSize - 2*this.getRadius()) < 0){
+            dx = -dx;
         }
-        if (ySize < 0 && dy < 0) {
+        if ((ySize - 2*this.getRadius()) < 0 ) {
             dy = -dy;
         }
-        if(ySize > gameBoardSize && dy > 0) {
+        if(ySize > gameBoardSize) {
             dy = -dy;
         }
 
