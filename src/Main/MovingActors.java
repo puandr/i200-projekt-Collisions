@@ -48,34 +48,6 @@ public class MovingActors extends Circle {
         this.setCenterX(this.getCenterX() + dx);
         this.setCenterY(this.getCenterY() + dy);
 
-        /*
-        movingDirectionX = Math.sin(movingAngle) * movingStepSize;
-        movingDirectionY = Math.cos(movingAngle) * movingStepSize;
-
-        //Collision with border, checking X to right border
-        if ((this.getCenterX() + getRadius() >= gameBoardSize)) {
-            this.setCenterX(this.getCenterX()-movingStepSize);
-            if((1.5*pi < movingAngle) && (movingAngle < 2*pi)){
-                movingAngle = calculateBouncingAngle(movingAngle);
-            }
-            if((pi < movingAngle) && (movingAngle < pi*1.5)){
-                movingAngle = movingAngle - pi/2;
-            }
-        }
-
-        //Collision detection with border, checking X to left border
-        if ((this.getCenterX() - getRadius() <= 0)) {
-            this.setCenterX(this.getCenterX() + movingStepSize);
-            if((0 < movingAngle) && (movingAngle < pi/2)){
-                movingAngle = movingAngle + 1.5*pi;
-            }
-            if((pi/2 > movingAngle) && (movingAngle < pi)){
-                movingAngle = movingAngle - pi/2;
-            }
-        }
-        this.setCenterX(getCenterX() - movingDirectionX);
-        this.setCenterY(getCenterY() - movingDirectionY);
-        */
     }
 
     double calculateBouncingAngle(double incomingAngle) {
