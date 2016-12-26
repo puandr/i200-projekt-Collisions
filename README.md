@@ -5,8 +5,7 @@ Mängualal alustad ühe mänguväljaku otsas, eesmärk jõuda teise mänguväljaku otsan
 
 ToDo
 LOGIC
-- Collision between opponents (USEFUL: https://gamedevelopment.tutsplus.com/tutorials/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769)
-- Finish point
+
 - Next game
 - Actors bounciong 10 pixels before the edge (right & bottom)
 
@@ -25,3 +24,5 @@ Maybe
 
 DONE
 - Main hero can't go outside the gameboard
+- Collision between opponents (USEFUL: https://gamedevelopment.tutsplus.com/tutorials/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769)
+- Finish point

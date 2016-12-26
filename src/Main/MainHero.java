@@ -28,6 +28,13 @@ public class MainHero extends MovingActors{
         return checkResult;
     }
 
+    boolean checkIfFinishLineIsReached(MainHero hero) {
+        boolean result = false;
+
+
+        return result;
+    }
+
 
 
 }

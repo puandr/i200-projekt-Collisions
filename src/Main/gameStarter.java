@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.util.concurrent.SynchronousQueue;
@@ -38,6 +39,16 @@ public class GameStarter {
         //gameOverVBox.getChildren().add(gameOverLabel);
         gameOverPane.getChildren().add(gameOverLabel);
 
+        StackPane winningPane = new StackPane();
+        Scene winningScene = new Scene(winningPane, gameBoardSize, gameBoardSize);
+        Label winningLabel = new Label();
+        winningPane.setAlignment(winningLabel, Pos.CENTER);
+        winningLabel.setText("You win!");
+        winningPane.getChildren().add(winningLabel);
+
+        Line finishLine = new Line(gameBoardSize, (gameBoardSize/2 - 30), gameBoardSize, (gameBoardSize/2 + 30));
+        gameBoardPane.getChildren().add(finishLine);
+
         //configuring Stage
         mainStage.setResizable(false); //disable change of gameboard (windows) size
         mainStage.setTitle("This game is about collisions");
@@ -47,9 +58,9 @@ public class GameStarter {
         gameBoardPane.getChildren().add(mainHero);
 
         //initializing opponents (Circle size, "Circle color", X-position, Y-position, moving speed or moving step size)
-        MovingActors firstOpponent = new MovingActors(80, "FF0000", 350, 125, movingStepSize);
+        MovingActors firstOpponent = new MovingActors(8, "FF0000", 350, 125, movingStepSize);
         gameBoardPane.getChildren().add(firstOpponent);
-        MovingActors secondOpponent = new MovingActors(40, "FF00FF", 350, 310, movingStepSize);
+        MovingActors secondOpponent = new MovingActors(4, "FF00FF", 350, 310, movingStepSize);
         gameBoardPane.getChildren().add(secondOpponent);
 
         mainStage.setScene(mainScene);
@@ -107,13 +118,16 @@ public class GameStarter {
                     System.out.println("Am I running?");
                     stop();
                     mainStage.setScene(gameOverScene);
+                }
 
+                if (mainHero.intersects(finishLine.getBoundsInLocal())) {
+                    System.out.println("Relax");
+                    stop();
+                    mainStage.setScene(winningScene);
                 }
 
             }
         }.start();
-
-
 
         /*
         If I want to move hero in two direction simultaneously,
