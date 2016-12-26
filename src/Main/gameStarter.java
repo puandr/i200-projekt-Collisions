@@ -10,7 +10,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
+
 public class GameStarter {
+
 
     public void start(Stage mainStage) throws Exception{
         int gameBoardSize = 500;
@@ -43,29 +47,73 @@ public class GameStarter {
         gameBoardPane.getChildren().add(mainHero);
 
         //initializing opponents (Circle size, "Circle color", X-position, Y-position, moving speed or moving step size)
-        MovingActors firstOpponent = new MovingActors(70, "FF0000", 300, 150, movingStepSize);
+        MovingActors firstOpponent = new MovingActors(80, "FF0000", 350, 125, movingStepSize);
         gameBoardPane.getChildren().add(firstOpponent);
-        MovingActors secondOpponent = new MovingActors(30, "FF0000", 300, 350, movingStepSize);
+        MovingActors secondOpponent = new MovingActors(40, "FF00FF", 350, 310, movingStepSize);
         gameBoardPane.getChildren().add(secondOpponent);
 
         mainStage.setScene(mainScene);
         mainStage.show();
 
         new AnimationTimer(){
+
             @Override
             public void handle (long now) {
                 firstOpponent.move(movingStepSize, gameBoardSize);
+                //firstOpponent.checkCollision(firstOpponent, secondOpponent, movingStepSize, gameBoardSize);
                 secondOpponent.move(movingStepSize, gameBoardSize);
+                //secondOpponent.checkCollision(firstOpponent, secondOpponent, movingStepSize);
+
+                //Lets make things slower, 1000 = 1sec
+                /*
+                try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+                */
+
+                double xDifferenceSquare = Math.pow((secondOpponent.getCenterX() - firstOpponent.getCenterX()), 2);
+                double yDifferenceSquare = Math.pow((secondOpponent.getCenterY() - firstOpponent.getCenterY()), 2);
+                double distanceBetweenOpponentCenters = Math.sqrt(xDifferenceSquare + yDifferenceSquare);
+
+                if (distanceBetweenOpponentCenters < (firstOpponent.getRadius() + secondOpponent.getRadius())) {
+
+                    double dx1 = firstOpponent.dx;
+                    double dy1 = firstOpponent.dy;
+                    double r1 = firstOpponent.getRadius();
+
+                    double dx2 = secondOpponent.dx;
+                    double dy2 = secondOpponent.dy;
+                    double r2 = secondOpponent.getRadius();
+
+                    firstOpponent.dx = (dx1 * (r1 - r2) + (2 * r2 * dx2)) / (r1 + r2);
+                    firstOpponent.dy = (dy1 * (r1 - r2) + (2 * r2 * dy2)) / (r1 + r2);
+                    secondOpponent.dx = (dx2 * (r2 - r1) + (2 * r1 * dx1)) / (r1 + r2);
+                    secondOpponent.dy = (dy2 * (r2 - r1) + (2 * r1 * dy1)) / (r1 + r2);
+
+                    firstOpponent.setCenterX(firstOpponent.getCenterX() - dx1);
+                    firstOpponent.setCenterY(firstOpponent.getCenterY() - dy1);
+                    secondOpponent.setCenterX(secondOpponent.getCenterX() - dx2);
+                    secondOpponent.setCenterY(secondOpponent.getCenterY() - dy2);
+
+                    System.out.println("We are in collision mode ");
+                    System.out.println("1 dy: " + firstOpponent.dy);
+                    System.out.println("2 dy: " + secondOpponent.dy);
+                    System.out.println();
+                }
+
                 if (mainHero.detectCollisionWithOpponents(firstOpponent.getCenterX(), firstOpponent.getCenterY(), firstOpponent.getRadius(), secondOpponent.getCenterX(), secondOpponent.getCenterY(), secondOpponent.getRadius())) {
                     System.out.println("Am I running?");
                     stop();
-                    //Platform.exit();
-                    //mainStage.setScene(gameOverScene);
                     mainStage.setScene(gameOverScene);
 
                 }
+
             }
         }.start();
+
+
 
         /*
         If I want to move hero in two direction simultaneously,
