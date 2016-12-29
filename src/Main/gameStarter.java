@@ -16,38 +16,34 @@ import java.util.concurrent.TimeUnit;
 
 public class GameStarter {
 
-
     public void start(Stage mainStage) throws Exception{
-        int gameBoardSize = 500;
-        int movingStepSize = 1;
+        int gameBoardSize = Main.gameBoardSizeValue;
+        int movingStepSize = Main.opponentSpeedValue;
         int mainHeroMovingStepSize = 10;
         String gameOverText = "Game Over!";
+        String winningText = "You win!";
 
         //Gameboard scene
         Pane gameBoardPane = new Pane();
         Scene mainScene = new Scene(gameBoardPane, gameBoardSize, gameBoardSize);
+        Line finishLine = new Line(gameBoardSize, (gameBoardSize/2 - 30), gameBoardSize, (gameBoardSize/2 + 30));
+        gameBoardPane.getChildren().add(finishLine);
 
         //GameOver scene
-        //VBox gameOverVBox = new VBox();
-        //Pane gameOverPane = new Pane();
         StackPane gameOverPane = new StackPane();
         Scene gameOverScene = new Scene(gameOverPane, gameBoardSize, gameBoardSize);
-        //gameOverVBox.setSpacing(20);
         Label gameOverLabel = new Label();
         gameOverPane.setAlignment(gameOverLabel, Pos.CENTER);
         gameOverLabel.setText(gameOverText);
-        //gameOverVBox.getChildren().add(gameOverLabel);
         gameOverPane.getChildren().add(gameOverLabel);
 
+        //Winning pane
         StackPane winningPane = new StackPane();
         Scene winningScene = new Scene(winningPane, gameBoardSize, gameBoardSize);
         Label winningLabel = new Label();
         winningPane.setAlignment(winningLabel, Pos.CENTER);
-        winningLabel.setText("You win!");
+        winningLabel.setText(winningText);
         winningPane.getChildren().add(winningLabel);
-
-        Line finishLine = new Line(gameBoardSize, (gameBoardSize/2 - 30), gameBoardSize, (gameBoardSize/2 + 30));
-        gameBoardPane.getChildren().add(finishLine);
 
         //configuring Stage
         mainStage.setResizable(false); //disable change of gameboard (windows) size
@@ -58,9 +54,9 @@ public class GameStarter {
         gameBoardPane.getChildren().add(mainHero);
 
         //initializing opponents (Circle size, "Circle color", X-position, Y-position, moving speed or moving step size)
-        MovingActors firstOpponent = new MovingActors(8, "FF0000", 350, 125, movingStepSize);
+        MovingActors firstOpponent = new MovingActors(Main.firstOpponentSizeValue, "FF0000", gameBoardSize-150, 100, movingStepSize);
         gameBoardPane.getChildren().add(firstOpponent);
-        MovingActors secondOpponent = new MovingActors(4, "FF00FF", 350, 310, movingStepSize);
+        MovingActors secondOpponent = new MovingActors(Main.secondOpponentSizeValue, "FF00FF", gameBoardSize-150, gameBoardSize-100, movingStepSize);
         gameBoardPane.getChildren().add(secondOpponent);
 
         mainStage.setScene(mainScene);
@@ -71,11 +67,9 @@ public class GameStarter {
             @Override
             public void handle (long now) {
                 firstOpponent.move(movingStepSize, gameBoardSize);
-                //firstOpponent.checkCollision(firstOpponent, secondOpponent, movingStepSize, gameBoardSize);
                 secondOpponent.move(movingStepSize, gameBoardSize);
-                //secondOpponent.checkCollision(firstOpponent, secondOpponent, movingStepSize);
 
-                //Lets make things slower, 1000 = 1sec
+                // Just for testing purposes, lets make things slower, 1000 = 1sec
                 /*
                 try {
                     Thread.sleep(1000);
@@ -84,12 +78,14 @@ public class GameStarter {
                 }
                 */
 
+                //Pythagoras theorem
                 double xDifferenceSquare = Math.pow((secondOpponent.getCenterX() - firstOpponent.getCenterX()), 2);
                 double yDifferenceSquare = Math.pow((secondOpponent.getCenterY() - firstOpponent.getCenterY()), 2);
                 double distanceBetweenOpponentCenters = Math.sqrt(xDifferenceSquare + yDifferenceSquare);
 
                 if (distanceBetweenOpponentCenters < (firstOpponent.getRadius() + secondOpponent.getRadius())) {
 
+                    //Have to assign temporary variables, otherwise secondOpponent dy and dx will use already changed firstOpponent dx and dy
                     double dx1 = firstOpponent.dx;
                     double dy1 = firstOpponent.dy;
                     double r1 = firstOpponent.getRadius();
@@ -98,28 +94,28 @@ public class GameStarter {
                     double dy2 = secondOpponent.dy;
                     double r2 = secondOpponent.getRadius();
 
+                    //calculating new direction and speed (Elastic collision)
                     firstOpponent.dx = (dx1 * (r1 - r2) + (2 * r2 * dx2)) / (r1 + r2);
                     firstOpponent.dy = (dy1 * (r1 - r2) + (2 * r2 * dy2)) / (r1 + r2);
                     secondOpponent.dx = (dx2 * (r2 - r1) + (2 * r1 * dx1)) / (r1 + r2);
                     secondOpponent.dy = (dy2 * (r2 - r1) + (2 * r1 * dy1)) / (r1 + r2);
 
+                    //On collision take a move back, so avoiding stacking in each other
                     firstOpponent.setCenterX(firstOpponent.getCenterX() - dx1);
                     firstOpponent.setCenterY(firstOpponent.getCenterY() - dy1);
                     secondOpponent.setCenterX(secondOpponent.getCenterX() - dx2);
                     secondOpponent.setCenterY(secondOpponent.getCenterY() - dy2);
 
-                    System.out.println("We are in collision mode ");
-                    System.out.println("1 dy: " + firstOpponent.dy);
-                    System.out.println("2 dy: " + secondOpponent.dy);
-                    System.out.println();
                 }
 
+                //Check collsion of Hero with opoonents, if true collsion is true, then game over
                 if (mainHero.detectCollisionWithOpponents(firstOpponent.getCenterX(), firstOpponent.getCenterY(), firstOpponent.getRadius(), secondOpponent.getCenterX(), secondOpponent.getCenterY(), secondOpponent.getRadius())) {
-                    System.out.println("Am I running?");
+                    System.out.println("You lost!");
                     stop();
                     mainStage.setScene(gameOverScene);
                 }
 
+                //Check if Hero reached the finish line, if true, game over.
                 if (mainHero.intersects(finishLine.getBoundsInLocal())) {
                     System.out.println("Relax");
                     stop();
@@ -130,8 +126,7 @@ public class GameStarter {
         }.start();
 
         /*
-        If I want to move hero in two direction simultaneously,
-        then I have to use KePressed  and Key Released, otherwise only
+        If I want to move hero in two direction simultaneously, then I have to use KePressed  and Key Released, otherwise only
         one KeyCode is passed to event handler.
          */
         mainScene.setOnKeyPressed (event -> {
