@@ -38,3 +38,22 @@ double calculateBouncingAngle(double incomingAngle) {
         }
         return bouncedAngle;
     }
+
+
+    BackgroundImage seetingsWindowBackgroundImage= new BackgroundImage(new Image("my url",32,32,false,true),
+                    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT);
+
+            String image = JavaFXAppl.class.getResource("background.jpg").toExternalForm();
+            newGamePane.setStyle("-fx-background-image: url('" + image + "'); " +
+                    "-fx-background-position: center center; " +
+                    "-fx-background-repeat: stretch;");
+
+
+                    Rectangle finishZone = new Rectangle();
+                            finishZone.setX(gameBoardSize-5);
+                            finishZone.setY(gameBoardSize/2 - 30);
+                            finishZone.setWidth(5);
+                            finishZone.setHeight(60);
+                            gameBoardPane.getChildren().add(finishZone);
+                            finishZone.setFill(Color.RED);

@@ -7,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,13 +21,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage mainStage) throws Exception{
-        int gameBoardSize = 500;
+        int settingsWindowSizeX = 330;
+        int settingsWindowSizeY = 250;
 
         GridPane newGamePane = new GridPane();
         mainStage.setResizable(false); //disable change of gameboard (windows) size
 
         Button newGameStartButton = new Button("Start Game");
         newGameStartButton.setTranslateY(50);
+        newGameStartButton.setTranslateX(-50);
 
         Label speedValueLabel = new Label("Choose opponents speed       ");
 
@@ -101,7 +105,7 @@ public class Main extends Application {
             }
         });
 
-        Scene newGameScene = new Scene(newGamePane, gameBoardSize, gameBoardSize);
+        Scene newGameScene = new Scene(newGamePane, settingsWindowSizeX, settingsWindowSizeY);
 
         newGamePane.add(speedValueLabel, 0, 0);
         newGamePane.add(opponentSpeedSlider, 1, 0);
@@ -113,9 +117,23 @@ public class Main extends Application {
         newGamePane.add(gameBoardSizeSlider, 1, 7);
         newGamePane.add(newGameStartButton, 1, 11);
 
+/*
+        BackgroundImage seetingsWindowBackgroundImage= new BackgroundImage(new Image("my url",32,32,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
 
+        String image = JavaFXAppl.class.getResource("background.jpg").toExternalForm();
+        newGamePane.setStyle("-fx-background-image: url('" + image + "'); " +
+                "-fx-background-position: center center; " +
+                "-fx-background-repeat: stretch;");
+*/
         mainStage.setScene(newGameScene);
         mainStage.show();
+
+        String myImage = "/background.jpg";
+        Image backgroundImage = new Image(myImage);
+        ImagePattern pattern = new ImagePattern(backgroundImage);
+        newGameScene.setFill(pattern);
 
         newGameStartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -15,7 +15,6 @@ DESIGN
     - Button "Play again"
 - Winning Scene
     - Congrats
-- Start Game scene
 
 Maybe
 - Timer
@@ -26,3 +25,4 @@ DONE
 - Main hero can't go outside the gameboard
 - Collision between opponents (USEFUL: https://gamedevelopment.tutsplus.com/tutorials/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769)
 - Finish point
+- Start Game scene
