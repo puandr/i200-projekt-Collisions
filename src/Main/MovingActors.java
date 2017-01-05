@@ -3,17 +3,9 @@ import javafx.scene.shape.Circle;
 
 public class MovingActors extends Circle {
     int size;
-    int movingSpeed;
-    double movingDirectionX;
-    double movingDirectionY;
     double movingAngle;
-    int collisionState;
-    double pi = Math.PI;
     double dx;
     double dy;
-    int moveNumber;
-
-    int collisionCounter = 0;
 
     public MovingActors (int circleSize, String circleColor, int xPosition, int yPosition, int movingStepSize){
         Color setCircleColor = Color.web(circleColor);
@@ -26,7 +18,6 @@ public class MovingActors extends Circle {
         movingAngle = Math.toRadians(Math.random()*360);
         dx = Math.sin(movingAngle) * movingStepSize;
         dy = Math.cos(movingAngle) * movingStepSize;
-
     }
 
     void move(int movingStepSize, int gameBoardSize){

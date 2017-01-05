@@ -14,7 +14,6 @@ public class MainHero extends MovingActors{
         boolean checkResult = false;
         double distanceToSecondOpponent = Math.hypot(opTwoX - this.getCenterX(), opTwoY - this.getCenterY());
         double distanceToFirstOpponent = Math.hypot(opOneX - this.getCenterX(), opOneY - this.getCenterY());
-        //System.out.println(distanceToFirstOpponent + " " + distanceToSecondOpponent);
 
         if ((distanceToFirstOpponent - (this.getRadius() + opOneRadius)) < 0){
             checkResult = true;
@@ -27,14 +26,5 @@ public class MainHero extends MovingActors{
 
         return checkResult;
     }
-
-    boolean checkIfFinishLineIsReached(MainHero hero) {
-        boolean result = false;
-
-
-        return result;
-    }
-
-
 
 }

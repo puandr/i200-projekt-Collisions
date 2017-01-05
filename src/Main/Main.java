@@ -10,6 +10,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -28,11 +29,10 @@ public class Main extends Application {
         mainStage.setResizable(false); //disable change of gameboard (windows) size
 
         Button newGameStartButton = new Button("Start Game");
-        newGameStartButton.setTranslateY(50);
+        newGameStartButton.setTranslateY(30);
         newGameStartButton.setTranslateX(-50);
 
         Label speedValueLabel = new Label("Choose opponents speed       ");
-
         Slider opponentSpeedSlider = new Slider();
         opponentSpeedSlider.setMin(1);
         opponentSpeedSlider.setMax(20);
@@ -53,7 +53,6 @@ public class Main extends Application {
         firstOpponentSizeSlider.setMajorTickUnit(20);
         firstOpponentSizeSlider.setMinorTickCount(10);
         firstOpponentSizeSlider.setTranslateY(10);
-
 
         Label secondOpponentSizeLabel = new Label("Choose size of second opponent");
         Slider secondOpponentSizeSlider = new Slider();
@@ -117,23 +116,22 @@ public class Main extends Application {
         newGamePane.add(gameBoardSizeSlider, 1, 7);
         newGamePane.add(newGameStartButton, 1, 11);
 
-/*
-        BackgroundImage seetingsWindowBackgroundImage= new BackgroundImage(new Image("my url",32,32,false,true),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
+        Rectangle licenseImageRectangle = new Rectangle();
+        licenseImageRectangle.setTranslateY(50);
+        licenseImageRectangle.setTranslateX(70);
+        licenseImageRectangle.setWidth(88);
+        licenseImageRectangle.setHeight(31);
+        newGamePane.add(licenseImageRectangle, 1, 13);
+        Image licenseImage = new Image("/pics/cc-by.png");
+        licenseImageRectangle.setFill(new ImagePattern(licenseImage));
 
-        String image = JavaFXAppl.class.getResource("background.jpg").toExternalForm();
-        newGamePane.setStyle("-fx-background-image: url('" + image + "'); " +
-                "-fx-background-position: center center; " +
-                "-fx-background-repeat: stretch;");
-*/
+        Image imageForBackground = new Image("/pics/bg.png");
+        BackgroundImage backgroundImage = new BackgroundImage(imageForBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        newGamePane.setBackground(new Background(backgroundImage));
+
+        mainStage.setTitle("Collision is my middle name");
         mainStage.setScene(newGameScene);
         mainStage.show();
-
-        String myImage = "/background.jpg";
-        Image backgroundImage = new Image(myImage);
-        ImagePattern pattern = new ImagePattern(backgroundImage);
-        newGameScene.setFill(pattern);
 
         newGameStartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
