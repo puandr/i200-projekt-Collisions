@@ -57,3 +57,11 @@ double calculateBouncingAngle(double incomingAngle) {
                             finishZone.setHeight(60);
                             gameBoardPane.getChildren().add(finishZone);
                             finishZone.setFill(Color.RED);
+
+Label finishLineLabel = new Label("FINISH");
+        finishLineLabel.setLayoutX(gameBoardSize - 41);
+        finishLineLabel.setLayoutY(gameBoardSize/2 - 10);
+        finishLineLabel.setFont(new Font("Arial", 20));
+        finishLineLabel.setTextFill(Color.LIME);
+        finishLineLabel.setRotate(270);
+        gameBoardPane.getChildren().add(finishLineLabel);

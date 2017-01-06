@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -104,6 +105,9 @@ public class Main extends Application {
             }
         });
 
+        Label shortDescription = new Label("Use arrows to reach the finish");
+        shortDescription.setTextFill(Color.FORESTGREEN);
+
         Scene newGameScene = new Scene(newGamePane, settingsWindowSizeX, settingsWindowSizeY);
 
         newGamePane.add(speedValueLabel, 0, 0);
@@ -115,6 +119,7 @@ public class Main extends Application {
         newGamePane.add(gameBoardSizeLabel, 0, 7);
         newGamePane.add(gameBoardSizeSlider, 1, 7);
         newGamePane.add(newGameStartButton, 1, 11);
+        newGamePane.add(shortDescription, 0, 11);
 
         Rectangle licenseImageRectangle = new Rectangle();
         licenseImageRectangle.setTranslateY(50);
