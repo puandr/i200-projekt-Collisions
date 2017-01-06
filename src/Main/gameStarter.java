@@ -14,9 +14,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class GameStarter {
+class GameStarter {
 
-    public void start(Stage mainStage) throws Exception{
+    void start(Stage mainStage) throws Exception{
         int gameBoardSize = Main.gameBoardSizeValue;
         int movingStepSize = Main.opponentSpeedValue;
         int mainHeroMovingStepSize = 10;
@@ -31,10 +31,8 @@ public class GameStarter {
         finishZone.setWidth(20);
         finishZone.setHeight(100);
         gameBoardPane.getChildren().add(finishZone);
-        //finishZone.setFill(Color.RED);
         Image finishLineImage = new Image("/pics/finishline.png");
         finishZone.setFill(new ImagePattern(finishLineImage));
-
         Image imageForBackground = new Image("/pics/bg.png");
         BackgroundImage backgroundImage = new BackgroundImage(imageForBackground, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         gameBoardPane.setBackground(new Background(backgroundImage));
@@ -42,7 +40,6 @@ public class GameStarter {
         //GameOver scene
         VBox gameOverPane = new VBox(50);
         gameOverPane.setAlignment(Pos.CENTER);
-        //gameOverPane.setStyle("-fx-background-color: black;");
         Scene gameOverScene = new Scene(gameOverPane, gameBoardSize, gameBoardSize);
         Label gameOverLabel = new Label();
         gameOverLabel.setText(gameOverText);
@@ -73,12 +70,10 @@ public class GameStarter {
         //Winning pane
         VBox winningPane = new VBox(50);
         winningPane.setAlignment(Pos.CENTER);
-
         Label winningLabel = new Label();
         winningLabel.setText(winningText);
         winningLabel.setFont(new Font("Arial", 60));
         winningLabel.setTextFill(Color.GREEN);
-        //winningPane.setStyle("-fx-background-color: blue");
         Image imageForWinningPane = new Image("/pics/winning.png");
         BackgroundImage winningBackgroundImage = new BackgroundImage(imageForWinningPane, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         winningPane.setBackground(new Background(winningBackgroundImage));
@@ -126,47 +121,17 @@ public class GameStarter {
         mainStage.setScene(mainScene);
         mainStage.show();
 
+        //Animation Timer is running every time JavaFX is drawing a frame
         new AnimationTimer(){
             @Override
             public void handle (long now) {
+                //Opponents are moving and bouncing from walls
                 firstOpponent.move(movingStepSize, gameBoardSize);
                 secondOpponent.move(movingStepSize, gameBoardSize);
 
-                // Just for testing purposes, lets make things slower, 1000 = 1sec
-                /*
-                try {
-                    Thread.sleep(1000);
-                } catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-                */
-
-                //Pythagoras theorem, for calculating distance between opponents
-                double xDifferenceSquare = Math.pow((secondOpponent.getCenterX() - firstOpponent.getCenterX()), 2);
-                double yDifferenceSquare = Math.pow((secondOpponent.getCenterY() - firstOpponent.getCenterY()), 2);
-                double distanceBetweenOpponentCenters = Math.sqrt(xDifferenceSquare + yDifferenceSquare);
-
-                if (distanceBetweenOpponentCenters < (firstOpponent.getRadius() + secondOpponent.getRadius())) {
-                    //Have to assign temporary variables, otherwise secondOpponent dy and dx will use already changed firstOpponent dx and dy
-                    double dx1 = firstOpponent.dx;
-                    double dy1 = firstOpponent.dy;
-                    double r1 = firstOpponent.getRadius();
-
-                    double dx2 = secondOpponent.dx;
-                    double dy2 = secondOpponent.dy;
-                    double r2 = secondOpponent.getRadius();
-
-                    //calculating new direction and speed (Elastic collision)
-                    firstOpponent.dx = (dx1 * (r1 - r2) + (2 * r2 * dx2)) / (r1 + r2);
-                    firstOpponent.dy = (dy1 * (r1 - r2) + (2 * r2 * dy2)) / (r1 + r2);
-                    secondOpponent.dx = (dx2 * (r2 - r1) + (2 * r1 * dx1)) / (r1 + r2);
-                    secondOpponent.dy = (dy2 * (r2 - r1) + (2 * r1 * dy1)) / (r1 + r2);
-
-                    //On collision take a move back, so avoiding stacking in each other
-                    firstOpponent.setCenterX(firstOpponent.getCenterX() - dx1);
-                    firstOpponent.setCenterY(firstOpponent.getCenterY() - dy1);
-                    secondOpponent.setCenterX(secondOpponent.getCenterX() - dx2);
-                    secondOpponent.setCenterY(secondOpponent.getCenterY() - dy2);
+                //Check collision between opponents, if true then bounce from each other
+                if (MovingActors.checkCollisionBetweenOpponents(firstOpponent, secondOpponent)) {
+                    MovingActors.collisionCalculation(firstOpponent, secondOpponent);
                 }
 
                 //Check collsion of Hero with opoonents, if collision is true, then game over
@@ -185,6 +150,7 @@ public class GameStarter {
             }
         }.start();
 
+        //Get input from user and move Hero accordingly
         mainScene.setOnKeyPressed (event -> {
             KeyCode code = event.getCode();
             if (code == KeyCode.RIGHT && ((mainHero.getCenterX() + mainHero.getRadius() < gameBoardSize))) {

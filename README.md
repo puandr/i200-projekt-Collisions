@@ -31,7 +31,7 @@ Tegelaste pildid on võetud veebilehelt https://pixabay.com/
 ToDo
 LOGIC
 - Use more than one key to move in diagonal
-
+- Put collision between opponents into MovingActors class
 
 DESIGN
 - Better design?

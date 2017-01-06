@@ -65,3 +65,10 @@ Label finishLineLabel = new Label("FINISH");
         finishLineLabel.setTextFill(Color.LIME);
         finishLineLabel.setRotate(270);
         gameBoardPane.getChildren().add(finishLineLabel);
+
+// Just for testing purposes, lets make things slower, 1000 = 1sec
+try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }

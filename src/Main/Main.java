@@ -15,11 +15,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
-    public static int opponentSpeedValue = 1;
-    public static int firstOpponentSizeValue = 50;
-    public static int secondOpponentSizeValue = 50;
-    public static int gameBoardSizeValue = 500;
+    static int opponentSpeedValue = 1;
+    static int firstOpponentSizeValue = 50;
+    static int secondOpponentSizeValue = 50;
+    static int gameBoardSizeValue = 500;
 
     @Override
     public void start(Stage mainStage) throws Exception{
@@ -105,8 +104,8 @@ public class Main extends Application {
             }
         });
 
-        Label shortDescription = new Label("Use arrows to reach the finish");
-        shortDescription.setTextFill(Color.FORESTGREEN);
+        //Label shortDescription = new Label("Use arrows to reach the finish");
+        //shortDescription.setTextFill(Color.FORESTGREEN);
 
         Scene newGameScene = new Scene(newGamePane, settingsWindowSizeX, settingsWindowSizeY);
 
@@ -119,7 +118,7 @@ public class Main extends Application {
         newGamePane.add(gameBoardSizeLabel, 0, 7);
         newGamePane.add(gameBoardSizeSlider, 1, 7);
         newGamePane.add(newGameStartButton, 1, 11);
-        newGamePane.add(shortDescription, 0, 11);
+        //newGamePane.add(shortDescription, 0, 11);
 
         Rectangle licenseImageRectangle = new Rectangle();
         licenseImageRectangle.setTranslateY(50);

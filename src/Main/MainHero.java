@@ -1,15 +1,16 @@
-public class MainHero extends MovingActors{
-    public MainHero(int circleSize, String circleColor, int xPosition, int yPosition, int movingStepSize){
+class MainHero extends MovingActors{
+    MainHero(int circleSize, String circleColor, int xPosition, int yPosition, int movingStepSize){
         super(circleSize, circleColor, xPosition, yPosition, movingStepSize);
     }
 
+    //peategelase liikumine
     void move (int horizontalMovement, int verticalMovement){
         this.setCenterX(getCenterX()-horizontalMovement);
         this.setCenterY(getCenterY()-verticalMovement);
-
     }
 
-    //opOne - opponent One, opTwo - opponent Two
+    //Check collision with opponents
+    //opOne - opponent One, opTwo - opponent Two.
     boolean detectCollisionWithOpponents(double opOneX, double opOneY, double opOneRadius, double opTwoX, double opTwoY, double opTwoRadius){
         boolean checkResult = false;
         double distanceToSecondOpponent = Math.hypot(opTwoX - this.getCenterX(), opTwoY - this.getCenterY());
@@ -23,8 +24,6 @@ public class MainHero extends MovingActors{
             checkResult = true;
             System.out.println("Collision with Second Opponent!!!");
         }
-
         return checkResult;
     }
-
 }
