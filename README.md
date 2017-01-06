@@ -47,6 +47,9 @@ LOGIC
 
 - Put collision between opponents into MovingActors class
 
+- Use getters and setters
+
+
 DESIGN
 
 - Better design?

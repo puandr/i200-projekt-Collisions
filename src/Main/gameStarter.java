@@ -15,7 +15,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 class GameStarter {
-
     void start(Stage mainStage) throws Exception{
         int gameBoardSize = Main.gameBoardSizeValue;
         int movingStepSize = Main.opponentSpeedValue;
