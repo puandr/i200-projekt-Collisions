@@ -1,44 +1,63 @@
 Andrei Pugatsov, 2016-2017
+
 i200 Projekt
-Projektiks oleks v‰ike m‰ng "Collision is my middle name"
+
+Projektiks oleks v√§ike m√§ng "Collision is my middle name"
+
 
 KIRJELDUS
-M‰ngualal alustad ¸he m‰nguv‰ljaku otsas, eesm‰rk jıuda teise m‰nguv‰ljaku otsani.
-M‰ngija ise on keskmise suurusega objekt. M‰nguv‰ljakul suvaliselt liiguvad teised objektid.
-Kui nad pırkavad omavahel vıi m‰ngija objektiga kokku siis arvutatakse objektide suurusi ja
-liikumisuundi ning peale pırkamist nad k‰ituvad vastavalt (nt kui suur ring pırkab v‰iksega,
-siis v‰ike ring pırkab tagasi suurema kiirusega ja suur liigub edasi natukene muutes suunda
-ja j‰‰des natukene aeglasemaks).
+
+M√§ngualal alustad √ºhe m√§nguv√§ljaku otsas, eesm√§rk j√µuda teise m√§nguv√§ljaku otsani.
+M√§ngija ise on keskmise suurusega objekt. M√§nguv√§ljakul suvaliselt liiguvad teised objektid.
+Kui nad p√µrkavad omavahel v√µi m√§ngija objektiga kokku siis arvutatakse objektide suurusi ja
+liikumisuundi ning peale p√µrkamist nad k√§ituvad vastavalt (nt kui suur ring p√µrkab v√§iksega,
+siis v√§ike ring p√µrkab tagasi suurema kiirusega ja suur liigub edasi natukene muutes suunda
+ja j√§√§des natukene aeglasemaks).
+
 
 KASUTUSJUHEND
-Esimesel aknal tuleb teha valikut m‰ngu protsessi kohta ja vajutada Start Game nupu. Kui kohe vajutada Start Game nupu,
-siis m‰ng alustatakse vaikimisi seadetega.
-Valida saab oponentide liikumise kiirust, oponentide suurust, m‰nguv‰lja suurust.
+
+Esimesel aknal tuleb teha valikut m√§ngu protsessi kohta ja vajutada Start Game nupu. Kui kohe vajutada Start Game nupu,
+siis m√§ng alustatakse vaikimisi seadetega.
+Valida saab oponentide liikumise kiirust, oponentide suurust, m√§nguv√§lja suurust.
 Liikumiseks tuleb kasutada noole klahve.
-Eesm‰rk on jıuda finish-jooneni paremas servas.
-Peategelase pırkamine teise objektiga (opponentidega) t‰endab m‰ngu lıppu ehk kaotuse.
+Eesm√§rk on j√µuda finish-jooneni paremas servas.
+Peategelase p√µrkamine teise objektiga (opponentidega) t√§endab m√§ngu l√µppu ehk kaotuse.
+
 
 LITSENTS
+
 Litsentsiks on Creative Commons litsents Attribution CC BY
 https://creativecommons.org/licenses/by/4.0/
 https://creativecommons.org/licenses/by/4.0/legalcode
 
+
 KASUTATUD MATERJALID
-Taustapildid on vıetud lehek¸ljelt https://subtlepatterns.com/
-Tegelaste pildid on vıetud veebilehelt https://pixabay.com/
+
+Taustapildid on v√µetud lehek√ºljelt https://subtlepatterns.com/
+Tegelaste pildid on v√µetud veebilehelt https://pixabay.com/
 
 
 
 ToDo
+
 LOGIC
+
 - Use more than one key to move in diagonal
+
 - Put collision between opponents into MovingActors class
 
 DESIGN
+
 - Better design?
 
+
 Maybe
+
 - Timer
+
 - Player name
+
 - Score table
+
 
