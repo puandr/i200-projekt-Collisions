@@ -23,7 +23,7 @@ public class GameStarter {
         String gameOverText = "Game Over!";
         String winningText = "You win!";
 
-        //Gameboard scene
+        //Game board scene
         Pane gameBoardPane = new Pane();
         Rectangle finishZone = new Rectangle();
         finishZone.setX(gameBoardSize-20);
