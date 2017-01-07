@@ -37,30 +37,3 @@ KASUTATUD MATERJALID
 Taustapildid on võetud leheküljelt https://subtlepatterns.com/
 Tegelaste pildid on võetud veebilehelt https://pixabay.com/
 
-
-
-ToDo
-
-LOGIC
-
-- Use more than one key to move in diagonal
-
-- Put collision between opponents into MovingActors class
-
-- Use getters and setters
-
-
-DESIGN
-
-- Better design?
-
-
-Maybe
-
-- Timer
-
-- Player name
-
-- Score table
-
-
