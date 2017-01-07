@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 
 class GameStarter {
     void start(Stage mainStage) throws Exception{
-        int gameBoardSize = Main.gameBoardSizeValue;
-        int movingStepSize = Main.opponentSpeedValue;
+        int gameBoardSize = GameSettings.gameBoardSizeValue;
+        int movingStepSize = GameSettings.opponentSpeedValue;
         int mainHeroMovingStepSize = 10;
         String gameOverText = "Game Over!";
         String winningText = "You win!";
@@ -106,12 +106,12 @@ class GameStarter {
         mainHero.setFill(new ImagePattern(mainHeroImage));
 
         //initializing opponents (Circle size, "Circle color", X-position, Y-position, moving speed or moving step size)
-        MovingActors firstOpponent = new MovingActors(Main.firstOpponentSizeValue, "FF0000", gameBoardSize-150, 100, movingStepSize);
+        MovingActors firstOpponent = new MovingActors(GameSettings.firstOpponentSizeValue, "FF0000", gameBoardSize-150, 100, movingStepSize);
         gameBoardPane.getChildren().add(firstOpponent);
         Image firstOpponentImage = new Image("/pics/opponent1.png");
         firstOpponent.setFill(new ImagePattern(firstOpponentImage));
 
-        MovingActors secondOpponent = new MovingActors(Main.secondOpponentSizeValue, "FF00FF", gameBoardSize-150, gameBoardSize-100, movingStepSize);
+        MovingActors secondOpponent = new MovingActors(GameSettings.secondOpponentSizeValue, "FF00FF", gameBoardSize-150, gameBoardSize-100, movingStepSize);
         gameBoardPane.getChildren().add(secondOpponent);
         Image secondOpponentImage = new Image("/pics/opponent2.png");
         secondOpponent.setFill(new ImagePattern(secondOpponentImage));
