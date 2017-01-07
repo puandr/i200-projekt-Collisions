@@ -134,7 +134,7 @@ class GameStarter {
                 }
 
                 //Check collsion of Hero with opoonents, if collision is true, then game over
-                if (mainHero.detectCollisionWithOpponents(firstOpponent.getCenterX(), firstOpponent.getCenterY(), firstOpponent.getRadius(), secondOpponent.getCenterX(), secondOpponent.getCenterY(), secondOpponent.getRadius())) {
+                if (mainHero.detectCollisionWithOpponents(firstOpponent, secondOpponent)) {
                     System.out.println("You lost!");
                     stop();
                     mainStage.setScene(gameOverScene);

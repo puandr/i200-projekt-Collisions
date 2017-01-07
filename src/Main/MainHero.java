@@ -11,16 +11,16 @@ class MainHero extends MovingActors{
 
     //Check collision with opponents
     //opOne - opponent One, opTwo - opponent Two.
-    boolean detectCollisionWithOpponents(double opOneX, double opOneY, double opOneRadius, double opTwoX, double opTwoY, double opTwoRadius){
+    boolean detectCollisionWithOpponents(MovingActors opOne, MovingActors opTwo){
         boolean checkResult = false;
-        double distanceToSecondOpponent = Math.hypot(opTwoX - this.getCenterX(), opTwoY - this.getCenterY());
-        double distanceToFirstOpponent = Math.hypot(opOneX - this.getCenterX(), opOneY - this.getCenterY());
+        double distanceToSecondOpponent = Math.hypot(opTwo.getCenterX() - this.getCenterX(), opTwo.getCenterY() - this.getCenterY());
+        double distanceToFirstOpponent = Math.hypot(opOne.getCenterX() - this.getCenterX(), opOne.getCenterY() - this.getCenterY());
 
-        if ((distanceToFirstOpponent - (this.getRadius() + opOneRadius)) < 0){
+        if ((distanceToFirstOpponent - (this.getRadius() + opOne.getRadius())) < 0){
             checkResult = true;
             System.out.println("Collision with First opponent!!!");
         }
-        else if((distanceToSecondOpponent) - (this.getRadius() + opTwoRadius) < 0) {
+        else if((distanceToSecondOpponent) - (this.getRadius() + opTwo.getRadius()) < 0) {
             checkResult = true;
             System.out.println("Collision with Second Opponent!!!");
         }
