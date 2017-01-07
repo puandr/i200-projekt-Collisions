@@ -152,7 +152,7 @@ class GameStarter {
         //Get input from user and move Hero accordingly
         mainScene.setOnKeyPressed (event -> {
             KeyCode code = event.getCode();
-            if (code == KeyCode.RIGHT && ((mainHero.getCenterX() + mainHero.getRadius() < gameBoardSize))) {
+            if (code == KeyCode.RIGHT && ((mainHero.getCenterX() + mainHero.getRadius()  < gameBoardSize))) {
                 mainHero.move(-mainHeroMovingStepSize,0);}
             else if (code == KeyCode.LEFT && ((mainHero.getCenterX() - mainHero.getRadius()) > 0 )){
                 mainHero.move(mainHeroMovingStepSize,0);}

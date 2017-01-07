@@ -64,7 +64,7 @@ class GameSettings{
 
         Label gameBoardSizeLabel = new Label("Choose gameboard size");
         Slider gameBoardSizeSlider = new Slider();
-        gameBoardSizeSlider.setMin(300);
+        gameBoardSizeSlider.setMin(400);
         gameBoardSizeSlider.setMax(700);
         gameBoardSizeSlider.setValue(500);
         gameBoardSizeSlider.setShowTickMarks(true);
